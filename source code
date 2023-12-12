@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+#define MAX_TICKETS 10 // Define the maximum number of tickets that can be sold
+
+struct Ticket {
+    int ticket_number;
+    char date_of_purchase[20];
+    int number_of_seats;
+    char arr[50];
+    char dest[50];
+};
+char name[100];
+	int age;
+	char password[100];
+	char email[100];
+	char mobile[10];
+
+int main()
+{
+    int tickets_sold = 0; // Keep track of the number of tickets sold
+    int ticket_count = 0; // Keep track of the number of tickets available
+    int user_input = 0; // Store the user's input
+
+    struct Ticket tickets[MAX_TICKETS]; // Array to store ticket information
+    printf("\n\n************Welcome to signup page*************\n");
+	printf("\tEnter Your name: ");
+	scanf("%s", name);
+
+	printf("\tEnter Your Age: ");
+	scanf("%d", &age);
+
+	printf("\tEnter Your Email: ");
+	scanf("%s", email);
+
+	printf("\tEnter Password: ");
+	scanf("%s", password);
+
+	printf("\nEnter Your Mobile Number: ");
+	scanf("%s", mobile);
+    printf("*****ACCOUNT CREATED SUCCESSFULLY*****");
+
+    // Main loop
+    while (1) {
+        // Display the menu
+        printf("\n\n\t*******TICKET BUDDY*******\n\n");
+        printf("1. Purchase a ticket\n");
+        printf("2. View ticket information\n");
+        printf("3. Exit\n\t");
+
+        printf("\tEnter your choice: ");
+        scanf("%d", &user_input);
+
+        switch (user_input) {
+            case 1:
+                // If there are no more tickets available, display a message
+                if (ticket_count >= MAX_TICKETS) {
+                    printf("Sorry, all tickets have been sold.\n");
+                    break;
+                }
+
+                // Take input for a new ticket
+                printf("Enter the number of seats: ");
+            scanf("%d", &tickets[ticket_count].number_of_seats);
+            printf("Enter the date of purchase (dd/mm/yyyy): ");
+            scanf("%s", tickets[ticket_count].date_of_purchase);
+            printf("\n Enter Arrival Station\n");
+            scanf("%s", tickets[ticket_count].arr);
+            printf("\n Enter Destination station\n");
+            scanf("%s", tickets[ticket_count].dest);
+            
+
+            tickets[ticket_count].ticket_number = ticket_count + 1; // Assign a unique ticket number
+
+            tickets_sold++; // Increment the number of tickets sold
+            ticket_count++; // Increment the number of tickets available
+             usleep(100000); 
+             {// dealy function
+            printf("Ticket purchased successfully!\n");}
+            printf("ticket details send to your registered mobile no. or you can check on the screen VIEW TICKET INFORMATION");
+            break;
+            case 2:
+                // Display the information for all the tickets
+                for (int i = 0; i < ticket_count; i++) {
+                    printf("Ticket number: %d\n", tickets[i].ticket_number);
+                    printf("Date of purchase: %s\n", tickets[i].date_of_purchase);
+                    printf("Number of seats: %d\n", tickets[i].number_of_seats);
+                    printf("Arrival station : %s\n",tickets[i].arr);
+                    printf("Destination station : %s\n", tickets[i].dest);
+                    printf("\n");
+                }
+                break;
+
+            case 3:
+            printf("\n**********************Thank you visit again*******************\n");
+            
+                // Exit the program
+                return 0;
+
+            default:
+                printf("Invalid choice. Try again.\n");
+                break;
+        }
+    }
+
+    return 0;
+}
